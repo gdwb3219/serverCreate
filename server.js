@@ -4,18 +4,9 @@ const app = express();
 
 const route = require("./route.js");
 
-app.use("/static", express.static(path.join(__dirname, "html")));
-app.use((req, res, next) => {
-  console.log("안녕!");
-  next();
-});
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "html", "main.html"));
-});
-app.get("/about", (req, res) => {
-  res.sendFile(path.join(__dirname, "html", "about.html"));
-});
+app.set("view engine", "pug"); // (1)
+app.set("views", path.join(__dirname, "html")); // (2)
+app.use(express.static(path.join(__dirname, "html")));
 
 app.use("/", route);
 app.use((req, res, next) => {
