@@ -1,4 +1,4 @@
-const { User } = require("../user");
+const { User } = require("../../user");
 
 let auth = function (req, res, next) {
   //인증 처리를 하는 곳

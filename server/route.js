@@ -87,4 +87,11 @@ router.get("/api/users/auth", auth, function (req, res) {
   });
 });
 
+router.get("/api/users/logout", auth, (req, res) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).json({ success: true });
+  });
+});
+
 module.exports = router; // 모듈로 만드는 부분
