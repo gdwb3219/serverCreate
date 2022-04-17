@@ -1,4 +1,6 @@
 // src/index.js
+import React from "react";
+import { ReactDOM } from "react";
 
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
@@ -6,6 +8,7 @@ import { applyMiddleware, createStore } from "redux";
 // 리덕스에서 필요한 미들웨어
 import promiseMiddleware from "redux-promise";
 import ReduxThunk from "redux-thunk";
+import App from "./App";
 
 // reducer 불러오기
 import Reducer from "./_reducers";

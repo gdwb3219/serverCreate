@@ -1,20 +1,44 @@
-// client/src/components/views/Loginpage/Loginpage.js
+// client/src/components/views/LoginPage/LoginPage.js
 
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../_actions/user_action";
 import { withRouter } from "react-router-dom";
 
 function LoginPage(props) {
+  // redux의 dispatch
+  const dispatch = useDispatch();
+
   // react hook에서 state 사용
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
 
   // handler 함수들
-  const onEmailHandler = (e) => {
-    setEmail(e.currentTarget.value);
+  const onEmailHandler = (event) => {
+    setEmail(event.currentTarget.value);
   };
 
-  const onPasswordHandler = (e) => {
-    setPassword(e.currentTarget.value);
+  const onPasswordHandler = (event) => {
+    setPassword(event.currentTarget.value);
+  };
+
+  const onSubmitHandler = (event) => {
+    // 태그의 기본 기능으로 리프레쉬 되는 것을 방지.
+    event.preventDefault();
+
+    let body = {
+      email: Email,
+      password: Password,
+    };
+
+    // action의 반환값을 dispatch해준다.
+    dispatch(loginUser(body)).then((response) => {
+      if (response.payload.loginSuccess) {
+        props.history.push("/");
+      } else {
+        alert("Error");
+      }
+    });
   };
 
   return (
