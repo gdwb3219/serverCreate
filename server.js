@@ -1,3 +1,4 @@
+const cookieParser = require("cookie-parser");
 const express = require("express");
 const path = require("path");
 const app = express();
@@ -9,6 +10,14 @@ app.set("view engine", "pug"); // (1)
 app.set("views", path.join(__dirname, "html")); // (2)
 app.use(express.static(path.join(__dirname, "html")));
 db();
+
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+); // application/x-www-form-urlencoded
+app.use(bodyParser.json()); //application/json
+app.use(cookieParser());
 
 app.use("/", route);
 app.use((req, res, next) => {
