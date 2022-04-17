@@ -1,12 +1,14 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const db = require("./db.js");
 
 const route = require("./route.js");
 
 app.set("view engine", "pug"); // (1)
 app.set("views", path.join(__dirname, "html")); // (2)
 app.use(express.static(path.join(__dirname, "html")));
+db();
 
 app.use("/", route);
 app.use((req, res, next) => {
